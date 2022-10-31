@@ -1,0 +1,21 @@
+﻿using ESourcing.Products.Data.Interfaces;
+using ESourcing.Products.Entities;
+using ESourcing.Products.Settings.Interfaces;
+using MongoDB.Driver;
+
+namespace ESourcing.Products.Data
+{
+	public class ProductContext : IProductContext
+	{
+		public IMongoCollection<Product> Products { get; }
+
+		public ProductContext(IProductDatabaseSettings settings)
+		{
+			var client = new MongoClient(settings.ConnectionString);
+			var database = client.GetDatabase(settings.DatabaseName);
+
+			Products = database.GetCollection<Product>(settings.CollectionName);
+			ProductContextSeed.SeedData(Products);
+		}
+	}
+}
