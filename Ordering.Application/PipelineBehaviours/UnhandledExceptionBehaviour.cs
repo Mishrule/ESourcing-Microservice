@@ -12,6 +12,7 @@ namespace Ordering.Application.PipelineBehaviours
 	public class UnhandledExceptionBehaviour<TRequest, TResponse>:IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 	{
 		private readonly ILogger<TRequest> _logger;
+		
 
 		public UnhandledExceptionBehaviour(ILogger<TRequest> logger)
 		{
@@ -27,9 +28,14 @@ namespace Ordering.Application.PipelineBehaviours
 			catch (Exception ex)
 			{
 				var requestName = typeof(TRequest).Name;
-				_logger.LogWarning(ex, "CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}",requestName, request);
+
+				_logger.LogError(ex, "CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
+
 				throw;
 			}
 		}
+
+		
+		
 	}
 }

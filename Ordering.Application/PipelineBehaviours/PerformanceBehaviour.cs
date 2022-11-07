@@ -1,12 +1,12 @@
-﻿using System;
+﻿using MediatR;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
-using Microsoft.Extensions.Logging;
 
 namespace Ordering.Application.PipelineBehaviours
 {
@@ -15,9 +15,9 @@ namespace Ordering.Application.PipelineBehaviours
 		private readonly Stopwatch _timer;
 		private readonly ILogger<TRequest> _logger;
 
-		public PerformanceBehaviour(Stopwatch timer, ILogger<TRequest> logger)
+		public PerformanceBehaviour(ILogger<TRequest> logger)
 		{
-			_timer = timer;
+			_timer = new Stopwatch();
 			_logger = logger;
 		}
 

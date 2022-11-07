@@ -15,6 +15,6 @@ namespace Ordering.Application.Commands.OrderCreate
 		public string ProductId { get; set; }
 		public decimal UnitPrice { get; set; }
 		public decimal TotalPrice { get; set; }
-		public DateTime CreateAt { get; set; }
+		public DateTime CreatedAt { get; set; }
 	}
 }
